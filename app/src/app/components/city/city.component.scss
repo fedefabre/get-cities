@@ -1,0 +1,26 @@
+.city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid grey;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+
+    // TODO: Remove it if not adding styles finally
+    &--name{
+
+    }
+    
+    &--detail{
+      color: grey;
+      font-size: 12px;
+    }
+  }
+
+  .selection {
+    margin-right: 15px;
+  }
+}
