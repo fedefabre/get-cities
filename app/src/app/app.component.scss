@@ -1,10 +1,12 @@
-.cities-form {
+.container {
+  display: flex;
+  flex-direction: column;
   min-width: 150px;
   max-width: 500px;
   width: 100%;
-
-  &--full-width {
-    width: 100%;
+  .cities-form {
+    &--full-width {
+      width: 100%;
+    }
   }
-  
 }
