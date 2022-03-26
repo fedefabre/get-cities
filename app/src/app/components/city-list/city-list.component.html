@@ -1,3 +1,8 @@
-<div class="list-container">
-  <app-city *ngFor="let city of cities" [city]="city"></app-city>
+<div class="list-container" [class.loader]="!cities">
+  <ng-container *ngIf="cities && cities.length > 0 else loading">
+    <app-city *ngFor="let city of cities" [city]="city"></app-city>
+  </ng-container>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>
