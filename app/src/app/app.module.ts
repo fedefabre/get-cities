@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CityListComponent } from './components/city-list/city-list.component';
 import { CityComponent } from './components/city/city.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,6 +24,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,

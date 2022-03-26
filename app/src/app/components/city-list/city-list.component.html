@@ -1,17 +1,3 @@
 <div class="list-container">
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
+  <app-city *ngFor="let city of cities" [city]="city"></app-city>
 </div>
