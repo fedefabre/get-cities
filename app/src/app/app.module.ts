@@ -11,9 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CityListComponent } from './components/city-list/city-list.component';
 import { CityComponent } from './components/city/city.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

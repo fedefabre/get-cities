@@ -1,17 +1,8 @@
-<div class="list-container">
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
-  <app-city></app-city>
+<div class="list-container" [class.loader]="!cities || cities.length === 0">
+  <cdk-virtual-scroll-viewport *ngIf="cities && cities.length > 0 else loading" itemSize="50" class="list">
+    <app-city *cdkVirtualFor="let city of cities" [city]="city"></app-city>
+  </cdk-virtual-scroll-viewport>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 </div>
