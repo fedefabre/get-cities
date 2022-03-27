@@ -8,31 +8,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { CityListComponent } from './components/city-list/city-list.component';
-import { CityComponent } from './components/city/city.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HttpClientModule } from '@angular/common/http';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatIconModule } from '@angular/material/icon';;
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { CityModule } from './city/city.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CityListComponent,
-    CityComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatCheckboxModule,
-    MatProgressSpinnerModule,
-    ScrollingModule
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CityModule
   ],
   providers: [],
   bootstrap: [AppComponent]
