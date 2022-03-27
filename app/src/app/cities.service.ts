@@ -11,7 +11,7 @@ export class CitiesService {
   constructor(private http: HttpClient) { }
 
   getCities(): Observable<any> {
-    return this.http.get('http://localhost:3030/cities', {params: {filter: 'bue', limit: 50, offset: 0}});
+    return this.http.get('http://localhost:3030/cities');
   }
 
 }
