@@ -1,7 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { CitiesService } from 'src/app/cities.service';
-import { CitiesResponse, CityInfo } from '../../model/city.interface';
+import { City } from 'src/app/models/city';
+import { CitiesResponse } from '../../model/city.interface';
+import { select, Store } from '@ngrx/store';
+import { CityState } from '../../city/store/reducer/city.reducer';
+import { selectCities } from '../../city/store/selector/city.selectors';
+import { loadCities } from '../../city/store/action/city.actions';
 
 @Component({
   selector: 'app-city-list',
@@ -10,13 +15,14 @@ import { CitiesResponse, CityInfo } from '../../model/city.interface';
 })
 export class CityListComponent {
   @Input() filter: HTMLInputElement;
-  cities: CityInfo[];
   loadingData = true;
   noResults = false;
   errorResponse = false;
+  cities$: Observable<City[]>;
 
-  constructor(private service: CitiesService) {
-    this.service.getCities('asasasas')
+  constructor(private service: CitiesService, private store: Store<CityState>) {
+    this.cities$ = this.store.pipe(select(selectCities))
+    this.service.getCities()
       .pipe(
         catchError(err => {
           this.errorResponse = true;
@@ -24,7 +30,7 @@ export class CityListComponent {
         })
       )
       .subscribe(({ data }: CitiesResponse) => {
-        this.cities = data;
+        this.store.dispatch(loadCities(data));
         this.noResults = data.length === 0;
         this.loadingData = false;
       });
@@ -34,7 +40,6 @@ export class CityListComponent {
   filtering(filter: any) {
     this.loadingData = true;
     this.service.getCities('').subscribe(({ data }: CitiesResponse) => {
-      this.cities = data
       this.noResults = data.length === 0;
       this.loadingData = false;
     });

@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CityInfo } from '../../model/city.interface';
+import { Component, Input } from '@angular/core';
+import { City } from '../../models/city';
 
 @Component({
   selector: 'app-city',
@@ -7,5 +7,5 @@ import { CityInfo } from '../../model/city.interface';
   styleUrls: ['./city.component.scss']
 })
 export class CityComponent {
-  @Input() city: CityInfo;
+  @Input() city: City;
 }

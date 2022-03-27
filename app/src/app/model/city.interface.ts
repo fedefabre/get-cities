@@ -1,5 +1,6 @@
+import { City } from '../models/city';
 export interface CitiesResponse {
-  data: CityInfo[];
+  data: City[];
   total: number;
   links: {
     first: string;
@@ -8,11 +9,4 @@ export interface CitiesResponse {
     last: string;
   };
   filter?: string;
-};
-
-export interface CityInfo {
-  geonameid: number;
-  name: string;
-  country: string;
-  subcountry?: string;
 };

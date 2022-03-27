@@ -15,6 +15,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { CityModule } from './city/city.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatIconModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    ScrollingModule
+    ScrollingModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CityModule
   ],
   providers: [],
   bootstrap: [AppComponent]
