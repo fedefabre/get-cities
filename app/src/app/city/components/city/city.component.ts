@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { City } from '../../models/city';
+import { City } from '../../../models/city';
 
 @Component({
   selector: 'app-city',
@@ -8,4 +8,5 @@ import { City } from '../../models/city';
 })
 export class CityComponent {
   @Input() city: City;
+  @Input() filterText: string = '';
 }

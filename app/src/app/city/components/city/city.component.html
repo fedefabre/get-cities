@@ -1,0 +1,9 @@
+<div class="city">
+  <mat-checkbox class="selection"></mat-checkbox>
+  <div class="city-info">
+    <div class="city-info--name" [innerHTML]="city.name | bolding:filterText"></div>
+    <div class="city-info--detail">
+      <span [innerHTML]="city.country | bolding:filterText"></span> - <span [innerHTML]="city.subcountry | bolding:filterText"></span>
+    </div>
+  </div>
+</div>

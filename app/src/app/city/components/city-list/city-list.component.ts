@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CitiesService } from 'src/app/cities.service';
 import { City } from 'src/app/models/city';
-import { CitiesResponse } from '../../model/city.interface';
+import { CitiesResponse } from '../../../model/city.interface';
 import { select, Store } from '@ngrx/store';
-import { CityState } from '../../city/store/reducer/city.reducer';
-import { filterCities, selectCities } from '../../city/store/selector/city.selectors';
-import { loadCities } from '../../city/store/action/city.actions';
+import { CityState } from '../../store/reducer/city.reducer';
+import { filterCities, selectCities } from '../../store/selector/city.selectors';
+import { loadCities } from '../../store/action/city.actions';
 
 @Component({
   selector: 'app-city-list',
@@ -24,10 +24,12 @@ export class CityListComponent {
   // Set of cities
   cities$: Observable<City[]>;
 
+  filterText = '';
   constructor(private service: CitiesService, private store: Store<CityState>) {
     this.cities$ = this.store.pipe(select(selectCities));
     // If filter is applied
     this.store.pipe(select(filterCities)).subscribe(filterText => {
+      this.filterText = filterText;
       this.getCities(filterText);
     })
     this.getCities();
