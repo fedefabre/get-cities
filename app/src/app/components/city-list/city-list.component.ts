@@ -5,7 +5,7 @@ import { City } from 'src/app/models/city';
 import { CitiesResponse } from '../../model/city.interface';
 import { select, Store } from '@ngrx/store';
 import { CityState } from '../../city/store/reducer/city.reducer';
-import { selectCities } from '../../city/store/selector/city.selectors';
+import { filterCities, selectCities } from '../../city/store/selector/city.selectors';
 import { loadCities } from '../../city/store/action/city.actions';
 
 @Component({
@@ -15,14 +15,27 @@ import { loadCities } from '../../city/store/action/city.actions';
 })
 export class CityListComponent {
   @Input() filter: HTMLInputElement;
+
+  // Flags used for UI
   loadingData = true;
   noResults = false;
   errorResponse = false;
+
+  // Set of cities
   cities$: Observable<City[]>;
 
   constructor(private service: CitiesService, private store: Store<CityState>) {
-    this.cities$ = this.store.pipe(select(selectCities))
-    this.service.getCities()
+    this.cities$ = this.store.pipe(select(selectCities));
+    // If filter is applied
+    this.store.pipe(select(filterCities)).subscribe(filterText => {
+      this.getCities(filterText);
+    })
+    this.getCities();
+  }
+
+  getCities(filter: string = ''): void {
+    this.clearFlags();
+    this.service.getCities(filter)
       .pipe(
         catchError(err => {
           this.errorResponse = true;
@@ -36,12 +49,9 @@ export class CityListComponent {
       });
   }
 
-  //TODO: fix any type
-  filtering(filter: any) {
+  private clearFlags(): void {
     this.loadingData = true;
-    this.service.getCities('').subscribe(({ data }: CitiesResponse) => {
-      this.noResults = data.length === 0;
-      this.loadingData = false;
-    });
+    this.errorResponse = false;
+    this.noResults = false;
   }
 }

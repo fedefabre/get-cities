@@ -9,3 +9,8 @@ export const selectCities = createSelector(
   selectCitiesState,
   (state: fromCity.CityState) => state.cities
 );  
+
+export const filterCities = createSelector(
+  selectCitiesState,
+  (state: fromCity.CityState) => state.filter
+);  

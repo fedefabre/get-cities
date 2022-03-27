@@ -8,24 +8,33 @@ export interface CityState {
   cities: City[];
   filter: string;
   selected: City[];
+  filtering: boolean;
 }
 
 export const initialState: CityState = {
   cities: [],
   filter: '',
-  selected: []
+  selected: [],
+  filtering: false
 };
 
 export const citiesReducer = createReducer(
   initialState,
   on(CityActions.loadCities,
     (state: CityState, { cities }) => {
-      debugger;
       return ({
         ...state,
-        cities: [...state.cities, ...cities]
+        cities
       })
-    })
+    }),
+    on(CityActions.applyingFilter,
+      (state: CityState, { filter }) => {
+        return ({
+          ...state,
+          filter: filter,
+          filtering: true
+        })
+      }),
   );
 
 export function reducer(state: CityState | undefined, action: Action): any {

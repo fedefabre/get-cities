@@ -3,7 +3,7 @@
     <mat-form-field class="cities-form--full-width" appearance="fill">
       <mat-icon matPrefix>filter_alt</mat-icon>
       <mat-label>Type to filter by city name or country</mat-label>
-      <input type="text" matInput placeholder="Buenos Aires">
+      <input type="text" matInput placeholder="Buenos Aires" (change)="filtering($event)">
     </mat-form-field>
   </form>
   <app-city-list></app-city-list>
