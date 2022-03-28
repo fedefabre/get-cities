@@ -2,6 +2,15 @@
   "name": "asapp-challenge",
   "version": "0.0.0",
   "scripts": {
-    "first-install": "npm i /api && npm i /app && node /api/server && npm run start /app"
+    "start": "npm i && cd ./api && npm i && cd .. && cd ./app && npm i && cd .. && concurrently \"npm run start-api\" \"npm run start-app\"",
+    "start-api": "node ./api/server",
+    "start-app": "cd app && npm run start"
+  },
+  "dependencies": {
+    "app": "file:app",
+    "frontend-challenge-cities-api": "file:api"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }
