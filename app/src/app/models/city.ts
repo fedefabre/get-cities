@@ -1,15 +1,17 @@
-export class City {
+export interface CitiesResponse {
+  data: City[];
+  total: number;
+  links: {
+    first: string;
+    next?: string;
+    prev?: string;
+    last: string;
+  };
+  filter?: string;
+};
+export interface City {
   geonameid: number;
   name: string;
   country: string;
-  preferred: boolean;
   subcountry?: string;
-
-  constructor({ geonameid, name, country, subcountry = '' }: any, favorites: number[]) {
-    this.geonameid = geonameid;
-    this.name = name;
-    this.country = country;
-    this.subcountry = subcountry;
-    this.preferred = favorites.some( id => id === this.geonameid);
-  }
 }
