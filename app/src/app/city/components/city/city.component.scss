@@ -8,6 +8,7 @@
   &-info {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 
     // TODO: Remove it if not adding styles finally
     &--name{
@@ -17,6 +18,12 @@
     &--detail{
       color: grey;
       font-size: 12px;
+    }
+  }
+
+  &-loader {
+    mat-spinner{
+      width: 20px
     }
   }
 

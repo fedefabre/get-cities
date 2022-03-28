@@ -1,9 +1,14 @@
 <div class="city">
-  <mat-checkbox [checked]="city.preferred" class="selection" (change)="toggleSelection($event)"></mat-checkbox>
+  <mat-checkbox [checked]="favorite || city.preferred" class="selection" (change)="toggleSelection($event)">
+  </mat-checkbox>
   <div class="city-info">
     <div class="city-info--name" [innerHTML]="city.name | bolding:filterText"></div>
     <div class="city-info--detail">
-      <span [innerHTML]="city.country | bolding:filterText"></span> - <span [innerHTML]="city.subcountry | bolding:filterText"></span>
+      <span [innerHTML]="city.country | bolding:filterText"></span> - <span
+        [innerHTML]="city.subcountry | bolding:filterText"></span>
     </div>
+  </div>
+  <div class="city-loader" *ngIf="loading">
+    <mat-spinner color="accent" diameter="30"></mat-spinner>
   </div>
 </div>

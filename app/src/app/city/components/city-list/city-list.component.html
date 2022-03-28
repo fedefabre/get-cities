@@ -2,7 +2,10 @@
   <ng-container *ngIf="!errorResponse else error">
     <div *ngIf="noResults">No results</div>
     <cdk-virtual-scroll-viewport *ngIf="!loadingData else loading" itemSize="50" class="list">
-      <app-city *cdkVirtualFor="let city of cities$ | async" [city]="city" [filterText]="filterText"></app-city>
+      <app-city 
+      *cdkVirtualFor="let city of cities$ | async" 
+      [city]="city" 
+      [filterText]="filterText"></app-city>
     </cdk-virtual-scroll-viewport>
   </ng-container>
   <ng-template #loading>
