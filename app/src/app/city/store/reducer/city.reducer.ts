@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { City } from 'src/app/models/city';
+import { City } from 'src/app/city/models/city';
 import * as CityActions from '../action/city.actions';
 
 export const cityFeatureKey = 'city';

@@ -30,7 +30,6 @@ import { CityModule } from './city/city.module';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     CityModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

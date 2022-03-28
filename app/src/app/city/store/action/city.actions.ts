@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
-import { City } from 'src/app/models/city';
+import { City } from 'src/app/city/models/city';
 
 export const loadCities = createAction(
   '[City] Load Cities',

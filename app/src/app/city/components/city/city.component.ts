@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { City } from '../../../models/city';
-import { CitiesService } from '../../../cities.service';
+import { City } from '../../models/city';
+import { CitiesService } from '../../cities.service';
 import { catchError, throwError } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CityState } from '../../store/reducer/city.reducer';
