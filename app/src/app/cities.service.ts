@@ -6,11 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CitiesService {
+  readonly path = 'http://localhost:3030';
 
   constructor(private http: HttpClient) { }
 
-  getCities(filter: string = ''): Observable<any> {
-    return this.http.get('http://localhost:3030/cities', { params: { filter } });
+  getCities(filter: string = '', limit = 50): Observable<any> {
+    return this.http.get(this.path + '/cities', { params: { filter } });
+  }
+
+  getPreferredCities(): Observable<any> {
+    return this.http.get(this.path + '/preferences/cities');
+  }
+
+  patchPreferred(id: number, preferred: boolean): Observable<any> {
+    return this.http.patch(this.path + '/preferences/cities', { [id]: preferred })
   }
 
 }

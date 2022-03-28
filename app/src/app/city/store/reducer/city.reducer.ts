@@ -7,35 +7,44 @@ export const cityFeatureKey = 'city';
 export interface CityState {
   cities: City[];
   filter: string;
-  selected: City[];
-  filtering: boolean;
+  preferred: Set<number>;
 }
 
 export const initialState: CityState = {
   cities: [],
   filter: '',
-  selected: [],
-  filtering: false
+  preferred: new Set([225284]),
 };
 
 export const citiesReducer = createReducer(
   initialState,
   on(CityActions.loadCities,
-    (state: CityState, { cities }) => {
+    (state: CityState, { cities, favorites }) => {
+      const citys = cities.map(city => new City(city, favorites))
+      console.log(citys);
       return ({
         ...state,
-        cities
+        cities: citys,
+        preferred: new Set(favorites)
       })
     }),
-    on(CityActions.applyingFilter,
-      (state: CityState, { filter }) => {
-        return ({
-          ...state,
-          filter: filter,
-          filtering: true
-        })
-      }),
-  );
+  on(CityActions.applyingFilter,
+    (state: CityState, { filter }) => {
+      return ({
+        ...state,
+        filter: filter,
+      })
+    }),
+  on(CityActions.addingFavorite,
+    (state: CityState, { geonameid }) => {
+      if (state.preferred.has(geonameid)) {
+
+      }
+      return ({
+        ...state
+      })
+    }),
+);
 
 export function reducer(state: CityState | undefined, action: Action): any {
   return citiesReducer(state, action);

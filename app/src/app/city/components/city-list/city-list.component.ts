@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, combineLatest, combineLatestWith, Observable, throwError } from 'rxjs';
 import { CitiesService } from 'src/app/cities.service';
 import { City } from 'src/app/models/city';
 import { CitiesResponse } from '../../../model/city.interface';
@@ -23,8 +23,8 @@ export class CityListComponent {
 
   // Set of cities
   cities$: Observable<City[]>;
-
   filterText = '';
+  
   constructor(private service: CitiesService, private store: Store<CityState>) {
     this.cities$ = this.store.pipe(select(selectCities));
     // If filter is applied
@@ -37,16 +37,19 @@ export class CityListComponent {
 
   getCities(filter: string = ''): void {
     this.clearFlags();
+    const preferred$ = this.service.getPreferredCities();
     this.service.getCities(filter)
       .pipe(
+        // Get the cities and the favorite at the same time
+        combineLatestWith(preferred$),
         catchError(err => {
           this.errorResponse = true;
           return throwError(err);
         })
       )
-      .subscribe(({ data }: CitiesResponse) => {
-        this.store.dispatch(loadCities(data));
-        this.noResults = data.length === 0;
+      .subscribe(([citiesResponse, favoriteCities]) => {
+        this.store.dispatch(loadCities(citiesResponse.data, favoriteCities.data));
+        this.noResults = citiesResponse.data.length === 0;
         this.loadingData = false;
       });
   }
