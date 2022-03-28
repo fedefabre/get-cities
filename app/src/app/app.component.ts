@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { applyingFilter } from './city/store/action/city.actions';
 import { CityState } from './city/store/reducer/city.reducer';
-import { debounce, debounceTime, Subject } from 'rxjs';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',

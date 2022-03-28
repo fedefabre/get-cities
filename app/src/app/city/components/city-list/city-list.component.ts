@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { catchError, combineLatest, combineLatestWith, Observable, throwError } from 'rxjs';
+import { catchError, combineLatestWith, Observable, throwError } from 'rxjs';
 import { CitiesService } from 'src/app/city/cities.service';
 import { City } from 'src/app/city/models/city';
 import { select, Store } from '@ngrx/store';
