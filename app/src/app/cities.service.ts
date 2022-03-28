@@ -10,7 +10,7 @@ export class CitiesService {
 
   constructor(private http: HttpClient) { }
 
-  getCities(filter: string = '', limit = 50): Observable<any> {
+  getCities(filter: string = ''): Observable<any> {
     return this.http.get(this.path + '/cities', { params: { filter } });
   }
 

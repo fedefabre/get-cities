@@ -24,7 +24,7 @@ export class CityListComponent {
   // Set of cities
   cities$: Observable<City[]>;
   filterText = '';
-  
+
   constructor(private service: CitiesService, private store: Store<CityState>) {
     this.cities$ = this.store.pipe(select(selectCities));
     // If filter is applied
@@ -35,16 +35,24 @@ export class CityListComponent {
     this.getCities();
   }
 
-  getCities(filter: string = ''): void {
+  getCities(filter: string = '', retry: number = 0): void {
+    // Retry 3 times until show error message
+    if (retry === 3) {
+      this.errorResponse = true;
+    }
+
     this.clearFlags();
+
+
+    // Get the cities and preferred cities at the same time using combineLatestWith
     const preferred$ = this.service.getPreferredCities();
     this.service.getCities(filter)
       .pipe(
-        // Get the cities and the favorite at the same time
         combineLatestWith(preferred$),
         catchError(err => {
-          this.errorResponse = true;
-          return throwError(err);
+          // If fail, retry
+          this.getCities(filter, retry++);
+          return throwError(() => err);
         })
       )
       .subscribe(([citiesResponse, favoriteCities]) => {

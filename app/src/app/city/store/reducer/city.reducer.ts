@@ -20,11 +20,10 @@ export const citiesReducer = createReducer(
   initialState,
   on(CityActions.loadCities,
     (state: CityState, { cities, favorites }) => {
-      const citys = cities.map(city => new City(city, favorites))
-      console.log(citys);
+      const citiesObj = cities.map(city => new City(city, favorites)).sort((a, b) => a.preferred ? -1 : 1)
       return ({
         ...state,
-        cities: citys,
+        cities: citiesObj,
         preferred: new Set(favorites)
       })
     }),
