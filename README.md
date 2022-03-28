@@ -25,4 +25,8 @@ The **Redux pattern** was necessary to unify the application state and thinking 
 ### UX Concerns
 
 - Keeping the selected cities at the top of the list could be improved adding some chips over the input, which will show always the selecteds. Also adding an X on those chips will be quicker to remove favorites.
-  
+
+---
+### Known issues for future releases
+
+- When the user select a new favorite city and does a quick scroll before the city ends loading the new preference then some other cities appear randomly as selected.
