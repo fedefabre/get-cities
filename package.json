@@ -1,0 +1,7 @@
+{
+  "name": "asapp-challenge",
+  "version": "0.0.0",
+  "scripts": {
+    "first-install": "npm i /api && npm i /app && node /api/server && npm run start /app"
+  }
+}

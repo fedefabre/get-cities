@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { City } from 'src/app/models/city';
+import { City } from 'src/app/city/models/city';
 import * as CityActions from '../action/city.actions';
 
 export const cityFeatureKey = 'city';
@@ -18,6 +18,7 @@ export const initialState: CityState = {
 
 export const citiesReducer = createReducer(
   initialState,
+
   on(CityActions.loadCities,
     (state: CityState, { cities, favorites }) => {
       const { preferred, otherCities } = getCities(cities, favorites);
@@ -27,6 +28,7 @@ export const citiesReducer = createReducer(
         preferred: favorites
       })
     }),
+
   on(CityActions.applyingFilter,
     (state: CityState, { filter }) => {
       return ({
@@ -34,6 +36,7 @@ export const citiesReducer = createReducer(
         filter: filter,
       })
     }),
+
   on(CityActions.updatingFavorite,
     (state: CityState, { geonameid, fav }) => {
       const newFavorites: number[] = fav ? [...state.preferred, geonameid] : state.preferred.filter(id => id !== geonameid);

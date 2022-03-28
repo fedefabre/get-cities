@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     HttpClientModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
     ScrollingModule,
     StoreModule.forFeature(cityFeatureKey, reducer)
   ],
