@@ -11,11 +11,7 @@ export const applyingFilter = createAction(
   (filter: string) => ({ filter })
 );
 
-export const addingFavorite = createAction(
-  '[City] Updating favorite Cities',
-  (geonameid: number) => ({ geonameid })
+export const updatingFavorite = createAction(
+  '[City] Updating favorite City',
+  (geonameid: number, fav: boolean) => ({ geonameid, fav })
 );
-
-
-
-

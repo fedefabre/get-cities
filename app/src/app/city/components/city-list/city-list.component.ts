@@ -2,10 +2,9 @@ import { Component, Input } from '@angular/core';
 import { catchError, combineLatest, combineLatestWith, Observable, throwError } from 'rxjs';
 import { CitiesService } from 'src/app/cities.service';
 import { City } from 'src/app/models/city';
-import { CitiesResponse } from '../../../model/city.interface';
 import { select, Store } from '@ngrx/store';
 import { CityState } from '../../store/reducer/city.reducer';
-import { filterCities, selectCities } from '../../store/selector/city.selectors';
+import { filterCities, selectCities, selectPrefer } from '../../store/selector/city.selectors';
 import { loadCities } from '../../store/action/city.actions';
 
 @Component({
@@ -23,15 +22,22 @@ export class CityListComponent {
 
   // Set of cities
   cities$: Observable<City[]>;
+  // Set of favorites
+  preferred: number[];
+  // Initial clean filter
   filterText = '';
 
   constructor(private service: CitiesService, private store: Store<CityState>) {
     this.cities$ = this.store.pipe(select(selectCities));
-    // If filter is applied
+    this.store.pipe(select(selectPrefer)).subscribe( favorites => this.preferred = favorites);
+
+    // Get cities each time a filter is applied
     this.store.pipe(select(filterCities)).subscribe(filterText => {
       this.filterText = filterText;
       this.getCities(filterText);
     })
+
+    // Get cities the first time
     this.getCities();
   }
 
@@ -42,7 +48,6 @@ export class CityListComponent {
     }
 
     this.clearFlags();
-
 
     // Get the cities and preferred cities at the same time using combineLatestWith
     const preferred$ = this.service.getPreferredCities();
@@ -60,6 +65,10 @@ export class CityListComponent {
         this.noResults = citiesResponse.data.length === 0;
         this.loadingData = false;
       });
+  }
+
+  trackBy(index: number, city: City) {
+    return city.geonameid;
   }
 
   private clearFlags(): void {

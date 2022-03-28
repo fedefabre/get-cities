@@ -10,6 +10,11 @@ export const selectCities = createSelector(
   (state: fromCity.CityState) => state.cities
 );  
 
+export const selectPrefer = createSelector(
+  selectCitiesState,
+  (state: fromCity.CityState) => state.preferred
+);  
+
 export const filterCities = createSelector(
   selectCitiesState,
   (state: fromCity.CityState) => state.filter

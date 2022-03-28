@@ -1,5 +1,5 @@
 <div class="city">
-  <mat-checkbox [checked]="favorite || city.preferred" class="selection" (change)="toggleSelection($event)">
+  <mat-checkbox [checked]="favorite" class="selection" (change)="toggleSelection($event)">
   </mat-checkbox>
   <div class="city-info">
     <div class="city-info--name" [innerHTML]="city.name | bolding:filterText"></div>
